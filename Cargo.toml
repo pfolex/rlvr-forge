@@ -1,0 +1,11 @@
+[package]
+name = "rlvr-forge"
+version = "0.1.0"
+edition = "2021"
+description = "Procedural Synthetic Environment & RLVR Generator with GRPO Advantage Normalization"
+license = "Apache-2.0"
+
+[lib]
+name = "rlvr_forge"
+path = "rust/src/lib.rs"
+crate-type = ["rlib"]
