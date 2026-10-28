@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: rlvr-forge
+      - uses: actions/checkout@v4
+        with:
+          repository: pfolex/verisci
+          path: verisci
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run Python RLVR-Forge Suite
+        run: PYTHONPATH="verisci/src:rlvr-forge/src" python3 -m unittest discover -s rlvr-forge/tests -v
+      - name: Run Rust Core Check & Tests
+        working-directory: rlvr-forge
+        run: cargo test
